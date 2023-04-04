@@ -1,0 +1,148 @@
+{{#each hotelOrders}}
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="full card horizontal">
+                    {{!-- <div class="card-image"><img src="/hotel/{{data.h_image}}"></div> --}}
+                    <div class="little card-image waves-effect waves-block waves-light">
+                        <img class="activator {{#unless data.open}}grey-image{{/unless}}" src="/hotel/{{data.h_image}}">
+                    </div>
+                    <div class="card-stacked">
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">
+                            <h5>{{data.h_name}} @ {{total_h_cost}} {{#if this.delivery_chosen}}{{#if this.delivery_provided}} + {{h_delivery_cost}} {{/if}}{{/if}}
+                                <a href="/hotel/details/{{data.h_username}}" class="btn waves-effect waves-light moved-left">
+                                    <i class="material-icons">visibility</i>
+                                </a>
+                            </h5>
+                            <br>
+                            {{data.h_username}}
+                            <br>
+                            {{data.h_phone}}
+                            <br>
+                            {{data.h_address}}
+                            <br>
+                            {{data.bio}}
+                        </span>
+                    </div>
+
+                    <div class="card-action">
+
+                        
+                            <p>
+                        
+                            {{#if this.delivery_provided}}
+                                <form class="line moved" action="/customer/cart/deliver" method="post">
+                                    <span>
+                                        {{!-- <label for=""><i class="material-icons small">delivery_dining</i></label> --}}
+                                        Delivery:
+                                        <label>
+                                            <input onchange="submit()" type="radio" name={{@key}} value=1 id="" {{#if this.delivery_chosen}} checked {{/if}}>
+                                            <span>Yes</span>
+                                        </label>
+                                        <label>
+                                            <input onchange="submit()" type="radio" name={{@key}} value=0 id="" {{#unless this.delivery_chosen}} checked {{/unless}}>
+                                            <span>No</span>
+                                        </label>
+                                    </span>
+                                </form>
+
+                                
+
+                            {{/if}}
+
+                            <button class="btn waves-effect waves-light {{#if data.h_delivery}}{{else}}non-primary{{/if}}">
+                                    {{data.h_delivery_cost}}
+                                    <i class="material-icons right">delivery_dining</i>
+                                    <i class="material-icons right">{{#if data.h_delivery}}check_circle{{else}}cancel{{/if}}</i>
+                                </button>
+                                <button class="btn waves-effect waves-light {{#if data.open}}{{else}}non-primary{{/if}}">
+                                    {{#if data.open}} Open {{else}} Closed {{/if}}
+                                    <i class="material-icons right">{{#if data.open}}check_circle{{else}}cancel{{/if}}</i>
+                                </button>
+                        
+                            </p>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="centered flex">
+           
+        {{#each orders}}
+            <div class="card sticky-action">
+
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator {{#unless this.available}}grey-image{{/unless}} {{#unless this.open}}grey-image{{/unless}}" src="/item/{{this.i_image}}">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">
+                        {{this.i_name}} @ {{this.i_quantity}} &#215; {{this.i_cost}}
+                        <i class="material-icons right">more_vert</i>
+                    </span>
+                </div>
+
+                <div class="card-action">
+                    {{!-- <p> --}}
+
+                            <button class="btn waves-effect waves-light line">
+                                    <i class="material-icons">add_shopping_cart</i>
+                            </button>
+                            
+                                {{!-- <span for="">Quantity</span> --}}
+                            <form class="line" action="/customer//cart/{{this.i_id}}/quantity" method="post">
+                                <input class="little" min="1" onchange="submit()" type="number" name=quantity value={{this.i_quantity}} id=""></span>
+                            </form>
+
+                            <form class="line" action="/customer/cart/{{this.i_id}}/remove" method="post">  
+                                <button class="btn waves-effect waves-light" type="submit" name="action">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                                {{!-- <button type="submit" name="action" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></button> --}}
+                            </form> 
+
+                            <button class="btn waves-effect waves-light {{#if this.available}}{{else}}non-primary{{/if}}">
+                                {{!-- {{#if this.available}} this.Available {{else}} Closed {{/if}} --}}
+                                <i class="material-icons">{{#if this.available}}check_circle{{else}}cancel{{/if}}</i>
+                            </button>
+                            
+                            
+                            
+                    {{!-- </p> --}}
+                </div>
+
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{this.i_name}} ({{this.category}})
+                        <i class="material-icons right">close</i>
+                    </span>
+                    <p>{{this.i_details}}</p>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{/each}}
+
+
+<div id="site-footer">
+    <div class="container clearfix">
+
+        <div class="fl left">
+            <h2 class="subtotal">Subtotal: &#x20b9; <span>{{total_cost}}</span></h2>
+            <h3 class="shipping">Shipping: &#x20b9; <span>{{delivery_cost}}</span></h3>
+        </div>
+
+
+        <div class="fr right">
+            <h2 class="total">Total: &#x20b9; <span>{{total_order_cost}}</span></h2>
+            <form action="/customer/order" method="post">
+                <input type="text" name="address" value="{{customer.address}}" id="">
+                <button type="submit" class="btn">Checkout</a>
+            </form>
+        </div>
+
+    </div>
+</div>

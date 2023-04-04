@@ -1,0 +1,184 @@
+{{#each objResult}}
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="full card horizontal">
+                    {{!-- <div class="card-image"><img src="/hotel/{{data.h_image}}"></div> --}}
+                    <div class="little card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="/hotel/{{this.h_image}}">
+                    </div>
+                    <div class="card-stacked">
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">
+                            <h5>{{this.h_name}} @ {{total_cost}} {{#if this.delivery_chosen}} + {{delivery_cost}} {{/if}}
+                                <a href="/hotel/details/{{this.h_username}}" class="btn waves-effect waves-light moved-left">
+                                    <i class="material-icons">visibility</i>
+                                </a>
+                            </h5>
+                            {{!-- <br> --}}
+                            {{!-- {{this.h_username}} --}}
+                            {{!-- <br> --}}
+                            {{!-- {{this.h_phone}} --}}
+                            {{!-- <br> --}}
+                            {{!-- {{this.h_address}} --}}
+                            {{!-- <br>
+                            {{this.bio}}
+                            <br> --}}
+                            <br>
+                            <h5>
+                                <a href="/customer/details/{{c_username}}">
+                                    <button class="btn waves-effect waves-light normal">
+                                        {{c_username}}
+                                    </button>
+                                </a> 
+                                's order
+                            </h5>
+                            <br>
+                            Deliver To: {{address}}
+                            {{!-- {{#if delivery_chosen}}
+                                Requires Delivery <br>
+                                {{#ifCond d_username null}}
+                                    No delivery boy assigned
+                                {{else}}
+                                    {{d_username}} is assigned
+                                {{/ifCond}}
+                            {{else}}
+                                    No Delivery Required
+                            {{/if}} --}}
+
+                            <br>
+                            <label for="">{{timestamp}}</label>
+                            {{!-- <i class="material-icons right">more_vert</i> --}}
+                        </span>
+                    </div>
+
+                    <div class="card-action">
+                        <p>
+                            <button class="btn waves-effect waves-light" type="submit" name="action">
+                                {{payment_status}}
+                                {{!-- <i class="material-icons right">cancel</i> --}}
+                            </button>
+
+                            <button class="btn waves-effect waves-light" type="submit" name="action">
+                                {{order_status}}
+                                {{!-- <i class="material-icons right">cancel</i> --}}
+                            </button>
+
+
+
+                            {{#ifCond d_username null}}
+                                <form class="line" action="/delivery/order/{{id}}/accept" method="post">  
+                                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                                        Accept
+                                        <i class="material-icons right">done</i>
+                                    </button>
+                                    {{!-- <button type="submit" name="action" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></button> --}}
+                                </form> 
+                                {{!-- <br> --}}
+                            {{else}}
+                                {{#ifCond payment_status "PENDING"}}
+                                    <form class="line" action="/delivery/order/{{id}}/payment/completed" method="post">  
+                                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                                            Payment Complete
+                                            <i class="material-icons right">help_outline</i>
+                                        </button>
+                                        {{!-- <button type="submit" name="action" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></button> --}}
+                                    </form> 
+                                {{/ifCond}}
+                                {{!-- <br> --}}
+                                {{#ifCond order_status "PENDING"}}
+                                    <form class="line" action="/delivery/order/{{id}}/status/completed" method="post">  
+                                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                                            Order Complete
+                                            <i class="material-icons right">help_outline</i>
+                                        </button>
+                                        {{!-- <button type="submit" name="action" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></button> --}}
+                                    </form> 
+                                {{/ifCond}}
+                            {{/ifCond}}
+                        </p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="centered flex">
+           
+        {{#each ioi}}
+            <div class="card sticky-action">
+
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="/item/{{this.image}}">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">
+                        {{this.name}}
+                        <br>
+                        Quantity : {{this.i_quantity}}
+                        <br>
+                        Total Cost : {{this.t_cost}} 
+                        <i class="material-icons right">more_vert</i>
+                    </span>
+                </div>
+
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{this.name}} ({{this.category}})
+                        <i class="material-icons right">close</i>
+                    </span>
+                    <p>{{this.details}}</p>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{/each}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

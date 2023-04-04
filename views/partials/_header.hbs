@@ -1,0 +1,86 @@
+
+
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+        <a href="/" class="brand-logo">pumpkin</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                {{#unless role}}
+                    <li><a href="/">Home</a></li>
+                {{/unless}}
+                {{#if role}}
+                    <li>
+                        <button class="btn waves-effect waves-light">
+                        {{!-- {{#if available}} Available {{else}} Closed {{/if}} --}}
+                            {{role}}
+                            {{!-- <i class="material-icons">{{#if available}}check_circle{{else}}cancel{{/if}}</i> --}}
+                        </button>
+                    </li>
+                {{/if}}
+                {{!-- <li><a href="/hotel/">Hotel</a></li> --}}
+                {{!-- <li><a href="/customer/">Customer</a></li> --}}
+                {{!-- <li><a href="/delivery/">Delivery</a></li> --}}
+                {{#if role}}
+                    <li><a href="/{{role}}">Dashboard</a></li>
+                {{/if}}
+                <li><a href="/hotel/list">Hotel List</a></li>
+                {{#ifCond role "customer"}}
+                    <li><a href="/customer/cart/">Cart</a></li>
+                {{/ifCond}}
+                {{#ifCond role "delivery"}}
+                    <li><a href="/delivery/order/unassigned/">Unassigned</a></li>
+                {{/ifCond}}
+                {{#ifCond role "hotel"}}
+                    <li><a href="/hotel/edit/">Edit</a></li>
+                    <li><a href="/hotel/item/create">Add Item</a></li>
+                {{/ifCond}}
+                {{#if role}}
+                    <li><a href="/{{role}}/order/pending">Pending</a></li>
+                    <li><a href="/{{role}}/order/completed">Completed</a></li>
+                    <li><a href="/{{role}}/order/cancelled">Cancelled</a></li>
+                    <li><a href="/{{role}}/logout">Logout</a></li>
+                {{/if}}
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        {{#unless role}}
+                    <li><a href="/">Home</a></li>
+                {{/unless}}
+                {{#if role}}
+                    <li>
+                        <button class="btn waves-effect waves-light">
+                        {{!-- {{#if available}} Available {{else}} Closed {{/if}} --}}
+                            {{role}}
+                            {{!-- <i class="material-icons">{{#if available}}check_circle{{else}}cancel{{/if}}</i> --}}
+                        </button>
+                    </li>
+                {{/if}}
+                {{!-- <li><a href="/hotel/">Hotel</a></li> --}}
+                {{!-- <li><a href="/customer/">Customer</a></li> --}}
+                {{!-- <li><a href="/delivery/">Delivery</a></li> --}}
+                {{#if role}}
+                    <li><a href="/{{role}}">Dashboard</a></li>
+                {{/if}}
+                <li><a href="/hotel/list">Hotel List</a></li>
+                {{#ifCond role "customer"}}
+                    <li><a href="/customer/cart/">Cart</a></li>
+                {{/ifCond}}
+                {{#ifCond role "delivery"}}
+                    <li><a href="/delivery/order/unassigned/">Unassigned</a></li>
+                {{/ifCond}}
+                {{#ifCond role "hotel"}}
+                    <li><a href="/hotel/edit/">Edit</a></li>
+                    <li><a href="/hotel/item/create">Add Item</a></li>
+                {{/ifCond}}
+                {{#if role}}
+                    <li><a href="/{{role}}/order/pending">Pending</a></li>
+                    <li><a href="/{{role}}/order/completed">Completed</a></li>
+                    <li><a href="/{{role}}/order/cancelled">Cancelled</a></li>
+                    <li><a href="/{{role}}/logout">Logout</a></li>
+                {{/if}}
+    </ul>
+</div>
+
